@@ -1,0 +1,70 @@
+<div style="padding:20px" class="container-fluid" ng-init="loadMatch()">
+	<div id="matchDetails" class="span3 well">
+		<h2>Match details:</h2>
+		<table class="table table-bordered text-center" style="width:200px">
+			<tr>
+				<th>Name</th>
+				<td>{{match.Name}}</td>
+			</tr>
+			<tr>
+				<th>Location</th>
+				<td>{{match.Location}}</td>
+			</tr>
+			<tr>
+				<th>Winner</th>
+				<td>{{match.Winner}}</td>
+			</tr>
+			<tr>
+				<th>Date</th>
+				<td>{{match.Date}}</td>
+			</tr>
+		</table>
+	</div>
+	<div id="participatingPidgeons" class="span9 well">
+		<h2>Pidgeons in match:</h2>
+		<table class="table table-bordered text-center">
+			<tr class="text-center">
+				<th>Id</th>
+				<th>Name</th>
+				<th>Owner Name</th>
+				<th>Wins</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="pidgeon in match.Pidgeons">
+				<td>{{pidgeon.Id}}</td>
+				<td>{{pidgeon.Name}}</td>
+				<td>{{pidgeon.Owner.Name}}</td>
+				<td>{{pidgeon.Wins}}</td>
+				<td>
+					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeonFromMatch($index, match.Id, pidgeon.Id)"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="owners">
+		<select ng-model="owner" ng-options="owner.Name as owner.Name for owner in owners">
+			<option value=""></option>
+		</select>
+	</div>
+	<div id="addPidgeons" class="span12 well">
+		<table class="table table-bordered text-center">
+		<tr class="text-center">
+			<th>Id</th>
+			<th>Name</th>
+			<th>Owner Name</th>
+			<th>Wins</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="pidgeon in pidgeons | ownerFilter:owner">
+			<td>{{pidgeon.Id}}</td>
+			<td>{{pidgeon.Name}}</td>
+			<td>{{pidgeon.Owner.Name}}</td>
+			<td>{{pidgeon.Wins}}</td>
+			<td>
+				<input class="btn btn-success" type="button" value="Add" ng-click="addPidgeonToMatch(pidgeon.Id)"/>
+			</td>
+		</tr>
+	</table>
+	</div>
+	<a href="#/matches"><button class="btn btn-primary">Back</button></a>
+</div>

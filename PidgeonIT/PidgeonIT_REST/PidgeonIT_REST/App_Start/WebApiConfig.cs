@@ -22,6 +22,12 @@ namespace PidgeonIT_REST
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "MatchApi",
+                routeTemplate: "api/{controller}/{matchId}/{pidgeonId}",
+                defaults: new { matchId = 1, pidgeonId = 1 }
+            );
         }
     }
 }

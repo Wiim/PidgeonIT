@@ -20,13 +20,78 @@ namespace PidgeonIT_REST
 
         public static List<Match> matches = new List<Match>
         {
-            new Match(){Id = 1, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2012, 12, 12), Winner = null},
-            new Match(){Id = 2, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2013, 12, 12), Winner = null},
-            new Match(){Id = 3, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2014, 12, 12), Winner = null},
-            new Match(){Id = 4, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2015, 12, 12), Winner = null},
-            new Match(){Id = 5, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2016, 12, 12), Winner = null},
-            new Match(){Id = 6, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2017, 12, 12), Winner = null}
+            new Match(){Id = 1, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2012, 12, 12), Winner = null, Pidgeons = new List<Pidgeon>
+            {
+                new Pidgeon(){Id = 1, Name = "Piet", Wins = 3, Owner = new Owner(){Id = 1, Name = "George"}},
+                new Pidgeon(){Id = 2, Name = "Klaas", Wins = 0, Owner = new Owner(){Id = 2, Name = "George"}},
+                new Pidgeon(){Id = 3, Name = "Jan", Wins = 1, Owner = new Owner(){Id = 3, Name = "George"}},
+                new Pidgeon(){Id = 4, Name = "Kees", Wins = 2, Owner = new Owner(){Id = 4, Name = "Herman"}},
+                new Pidgeon(){Id = 5, Name = "Bert", Wins = 5, Owner = new Owner(){Id = 5, Name = "Obama"}},
+                new Pidgeon(){Id = 6, Name = "Peter", Wins = 0, Owner = new Owner(){Id = 6, Name = "Beatrix"}},
+            }},
+            new Match(){Id = 2, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2013, 12, 12), Winner = null, Pidgeons = new List<Pidgeon>
+            {
+                new Pidgeon(){Id = 1, Name = "Piet", Wins = 3, Owner = new Owner(){Id = 1, Name = "George"}},
+                new Pidgeon(){Id = 2, Name = "Klaas", Wins = 0, Owner = new Owner(){Id = 2, Name = "George"}},
+                new Pidgeon(){Id = 3, Name = "Jan", Wins = 1, Owner = new Owner(){Id = 3, Name = "George"}},
+                new Pidgeon(){Id = 4, Name = "Kees", Wins = 2, Owner = new Owner(){Id = 4, Name = "Herman"}},
+                new Pidgeon(){Id = 5, Name = "Bert", Wins = 5, Owner = new Owner(){Id = 5, Name = "Obama"}}
+            }},
+            new Match(){Id = 3, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2014, 12, 12), Winner = null, Pidgeons = new List<Pidgeon>
+            {
+                new Pidgeon(){Id = 1, Name = "Piet", Wins = 3, Owner = new Owner(){Id = 1, Name = "George"}},
+                new Pidgeon(){Id = 2, Name = "Klaas", Wins = 0, Owner = new Owner(){Id = 2, Name = "George"}},
+                new Pidgeon(){Id = 3, Name = "Jan", Wins = 1, Owner = new Owner(){Id = 3, Name = "George"}},
+                new Pidgeon(){Id = 4, Name = "Kees", Wins = 2, Owner = new Owner(){Id = 4, Name = "Herman"}}
+            }},
+            new Match(){Id = 4, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2015, 12, 12), Winner = null, Pidgeons = new List<Pidgeon>
+            {
+                new Pidgeon(){Id = 1, Name = "Piet", Wins = 3, Owner = new Owner(){Id = 1, Name = "George"}},
+                new Pidgeon(){Id = 2, Name = "Klaas", Wins = 0, Owner = new Owner(){Id = 2, Name = "George"}},
+                new Pidgeon(){Id = 3, Name = "Jan", Wins = 1, Owner = new Owner(){Id = 3, Name = "George"}}
+            }},
+            new Match(){Id = 5, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2016, 12, 12), Winner = null, Pidgeons = new List<Pidgeon>
+            {
+                new Pidgeon(){Id = 1, Name = "Piet", Wins = 3, Owner = new Owner(){Id = 1, Name = "George"}},
+                new Pidgeon(){Id = 2, Name = "Klaas", Wins = 0, Owner = new Owner(){Id = 2, Name = "George"}}
+            }},
+            new Match(){Id = 6, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2017, 12, 12), Winner = null, Pidgeons = new List<Pidgeon>
+            {
+                new Pidgeon(){Id = 1, Name = "Piet", Wins = 3, Owner = new Owner(){Id = 1, Name = "George"}}
+            }}
         };
+
+        public static List<Owner> owners = new List<Owner>
+        {
+            new Owner(){Id = 1, Name = "George"},
+            new Owner(){Id = 2, Name = "Herman"},
+            new Owner(){Id = 3, Name = "Obama"},
+            new Owner(){Id = 4, Name = "Beatrix"}
+        };
+
+        public static List<Owner> getOwners()
+        {
+            return owners;
+        }
+
+        public static bool removePidgeonFromMatch(int matchId, int pidgeonId)
+        {
+            for (int i=0; i<matches.Count; i++)
+            {
+                if (matches[i].Id == matchId)
+                {
+                    for (int j=0; j<matches[i].Pidgeons.Count; j++)
+                    {
+                        if (matches[i].Pidgeons[j].Id == pidgeonId)
+                        {
+                            matches[i].Pidgeons.RemoveAt(j);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
 
         public static List<Match> getMatches()
         {

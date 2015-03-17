@@ -1,6 +1,7 @@
 var pidgeonITApp = angular.module('pidgeonITApp', [
   'ngRoute',
-  'pidgeonITControllers'
+  'pidgeonITControllers',
+  'pidgeonITFilters'
 ]);
 
 pidgeonITApp.config(['$routeProvider',
@@ -12,12 +13,12 @@ pidgeonITApp.config(['$routeProvider',
       }).
       when('/matches', {
         templateUrl: 'matches.html',
+        controller: 'MatchesController'
+      }).
+      when('/matches/:matchId', {
+        templateUrl: 'match.html',
         controller: 'MatchController'
       }).
-        when('/match/:matchId', {
-            templateUrl: 'match.html',
-            controller: 'MatchController'
-        }).
       otherwise({
         redirectTo: '/index'
       });

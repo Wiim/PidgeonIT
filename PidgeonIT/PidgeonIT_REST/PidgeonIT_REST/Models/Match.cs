@@ -12,5 +12,6 @@ namespace PidgeonIT_REST.Models
         public string Location { get; set; }
         public DateTime Date { get; set; }
         public Pidgeon Winner { get; set; }
+        public List<Pidgeon> Pidgeons { get; set; }
     }
 }

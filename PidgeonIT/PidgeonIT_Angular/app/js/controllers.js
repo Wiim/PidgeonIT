@@ -13,7 +13,7 @@ pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', functio
 	$scope.unloadPidgeons = function()
 	{
 		$scope.pidgeons = null;
-	}
+	};
 	
 	$scope.loadPidgeon = function(pidgeonId)
 	{
@@ -45,7 +45,7 @@ pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', functio
 		{
 			$scope.pidgeons = data;
 			//$scope.pidgeons.push(pidgeon);
-		}).error(function(data){/*stuff*/});
+		}).error(function(data){console.log(data);});
 	};
 	
 	$scope.editPidgeon = function(pidgeon)
@@ -54,26 +54,67 @@ pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', functio
 		{
 			$scope.pidgeons = data;
 			//$scope.pidgeons.push(pidgeon);
-		}).error(function(data){/*stuff*/});
-	}
+		}).error(function(data){console.log(data);});
+	};
 }]);
 
-pidgeonITControllers.controller('MatchController', ['$scope', '$http', function($scope, $http)
+pidgeonITControllers.controller('MatchesController', ['$scope', '$http', '$location', function($scope, $http, $location)
 {
-<<<<<<< HEAD
 	$scope.loadMatches = function()
 	{
 		$http.get('http://localhost:56981/api/match/').success(function(data)
 		{
-			$scope.match = data;
-		}).error(function(data){/*stuff*/});
-	}
-=======
-
+			$scope.matches = data;
+		}).error(function(data){console.log(data);});
+	};
+	
 	$scope.viewMatch = function(id)
     {
-        $location.path('#/matches/' + id);
-    }
+        $location.path('/matches/' + id);
+    };
+}]);
 
->>>>>>> 25bac2dfd2c059e1448796d2c936ebf2938e359d
+pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams)
+{
+	$scope.addPidgeonToMatch = function(pidgeonId)
+	{
+		$http.post('http://localhost:56981/api/match/' + matchId + '/' + pidgeonId).success(function(data)
+		{
+			$scope.pidgeons = data;
+		}).error(function(data){console.log(data);});
+	};
+	
+	$scope.loadMatch = function()
+	{
+		$http.get('http://localhost:56981/api/match/' + $routeParams.matchId).success(function(data)
+		{
+			$scope.match = data;
+			$scope.getOwners();
+			$scope.loadPidgeons();
+		}).error(function(data){console.log(data);});
+	};
+	
+	$scope.loadPidgeons = function()
+	{
+		$http.get('http://localhost:56981/api/pidgeon').success(function(data)
+		{
+			$scope.pidgeons = data;
+		}).error(function(data){$scope.pidgeons = data});
+	};
+	
+	$scope.removePidgeonFromMatch = function(index, matchId, pidgeonId)
+	{
+		$http.delete('http://localhost:56981/api/match/' + matchId + '/' + pidgeonId).success(function(data)
+		{
+			$scope.match.Pidgeons.splice(index, 1);
+		}).error(function(data){console.log(data);});
+	};
+	
+	$scope.getOwners = function()
+	{
+		$http.get('http://localhost:56981/api/owner/').success(function(data)
+		{
+			$scope.owners = data;
+		}).error(function(data){console.log(data);});
+	};
 }]);
