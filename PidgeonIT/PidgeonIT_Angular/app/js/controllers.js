@@ -1,4 +1,6 @@
-app.controller('PidgeonController', ['$scope', '$http', function($scope, $http)
+var pidgeonITControllers = angular.module('pidgeonITControllers', []);
+
+pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', function($scope, $http)
 {
 	$scope.loadPidgeons = function()
 	{
@@ -54,4 +56,9 @@ app.controller('PidgeonController', ['$scope', '$http', function($scope, $http)
 			//$scope.pidgeons.push(pidgeon);
 		}).error(function(data){/*stuff*/});
 	}
+}]);
+
+pidgeonITControllers.controller('MatchController', ['$scope', function($scope)
+{
+	//stuff here
 }]);

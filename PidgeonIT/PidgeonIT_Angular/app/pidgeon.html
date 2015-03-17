@@ -1,4 +1,37 @@
-ID: {{pidgeon.Id}}<br>
-Name: {{pidgeon.Name}}<br>
-Owner: {{pidgeon.Owner.Name}}<br>
-Wins: {{pidgeon.Wins}}<br>
+<div class="container-fluid">
+<input class="btn" type="button" value="Load Pidgeons" ng-click="loadPidgeons()"/>
+	<input class="btn" type="button" value="Unload Pidgeons" ng-click="unloadPidgeons()"/>
+	<table class="table table-bordered text-center">
+		<tr class="text-center">
+			<th>Id</th>
+			<th>Name</th>
+			<th>Owner Name</th>
+			<th>Wins</th>
+			<th>Action</th>
+			<th hidden class="error">Error</th>
+		</tr>
+		<tr ng-repeat="pidgeon in pidgeons">
+			<td><input type="text" ng-model="pidgeon.Id"/></td>
+			<td><input type="text" ng-model="pidgeon.Name"/></td>
+			<td><input type="text" ng-model="pidgeon.Owner.Name"/></td>
+			<td><input type="text" ng-model="pidgeon.Wins"/></td>
+			<td>
+				<input class="btn btn-warning" type="button" value="Edit" ng-click="editPidgeon(pidgeon)"/>
+				<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeon($index, pidgeon.Id)"/>
+			</td>
+			<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
+		</tr>
+		<tr>
+			<td><input type="text" ng-model="pidgeon.Id"/></td>
+			<td><input type="text" ng-model="pidgeon.Name"/></td>
+			<td><input type="text" ng-model="pidgeon.Owner.Name"/></td>
+			<td><input type="text" ng-model="pidgeon.Wins"/></td>
+			<td><input class="btn btn-success" type="button" value="Add" ng-click="addPidgeon(pidgeon)"/></td>
+			<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
+		</tr>
+	</table>
+	<hr>
+	<button ng-click="loadPidgeon(pidgeonId)">load pidgeon</button>
+	<input ng-model="pidgeonId"/>
+	<br>Pidgeon is: {{pidgeon}}
+</div>
