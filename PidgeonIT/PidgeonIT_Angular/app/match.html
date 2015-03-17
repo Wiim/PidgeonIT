@@ -41,12 +41,12 @@
 			</tr>
 		</table>
 	</div>
-	<div id="owners">
-		<select ng-model="owner" ng-options="owner.Name as owner.Name for owner in owners">
+	<div id="addPidgeons" class="span12 well">
+		<h2>Addable pidgeons:</h2>
+		<b>Owner:</b>
+		<select class="form-control" ng-model="owner" ng-options="owner.Name as owner.Name for owner in owners">
 			<option value=""></option>
 		</select>
-	</div>
-	<div id="addPidgeons" class="span12 well">
 		<table class="table table-bordered text-center">
 		<tr class="text-center">
 			<th>Id</th>

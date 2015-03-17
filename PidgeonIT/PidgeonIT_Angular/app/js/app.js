@@ -1,7 +1,8 @@
 var pidgeonITApp = angular.module('pidgeonITApp', [
   'ngRoute',
   'pidgeonITControllers',
-  'pidgeonITFilters'
+  'pidgeonITFilters',
+  'pidgeonITServices'
 ]);
 
 pidgeonITApp.config(['$routeProvider',

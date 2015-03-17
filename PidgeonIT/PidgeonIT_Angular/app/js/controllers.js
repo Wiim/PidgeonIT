@@ -1,13 +1,17 @@
 var pidgeonITControllers = angular.module('pidgeonITControllers', []);
 
-pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', function($scope, $http)
+pidgeonITControllers.controller('PidgeonController', 
+['$scope', '$http', 'PidgeonService', function($scope, $http, PidgeonService)
 {
 	$scope.loadPidgeons = function()
 	{
-		$http.get('http://localhost:56981/api/pidgeon').success(function(data)
-		{
-			$scope.pidgeons = data;
-		}).error(function(data){$scope.pidgeons = data});
+		console.log(PidgeonService.loadPidgeons());
+		//$scope.pidgeons = PidgeonService.loadPidgeons();
+		
+		// $http.get('http://localhost:56981/api/pidgeon').success(function(data)
+		// {
+			// $scope.pidgeons = data;
+		// }).error(function(data){$scope.pidgeons = data});
 	};
 	
 	$scope.unloadPidgeons = function()
