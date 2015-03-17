@@ -85,11 +85,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\PidgeonController.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Match.cs" />
     <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pidgeon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

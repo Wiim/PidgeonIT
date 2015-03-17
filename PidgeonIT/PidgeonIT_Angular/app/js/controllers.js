@@ -58,7 +58,13 @@ pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', functio
 	}
 }]);
 
-pidgeonITControllers.controller('MatchController', ['$scope', function($scope)
+pidgeonITControllers.controller('MatchController', ['$scope', '$http', function($scope, $http)
 {
-	//stuff here
+	$scope.loadMatches = function()
+	{
+		$http.get('http://localhost:56981/api/match/').success(function(data)
+		{
+			$scope.match = data;
+		}).error(function(data){/*stuff*/});
+	}
 }]);

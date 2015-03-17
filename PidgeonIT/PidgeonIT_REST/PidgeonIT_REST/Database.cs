@@ -18,6 +18,26 @@ namespace PidgeonIT_REST
             new Pidgeon(){Id = 6, Name = "Peter", Wins = 0, Owner = new Owner(){Id = 6, Name = "Beatrix"}},
         };
 
+        public static List<Match> matches = new List<Match>
+        {
+            new Match(){Id = 1, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2012, 12, 12), Winner = null},
+            new Match(){Id = 2, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2013, 12, 12), Winner = null},
+            new Match(){Id = 3, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2014, 12, 12), Winner = null},
+            new Match(){Id = 4, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2015, 12, 12), Winner = null},
+            new Match(){Id = 5, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2016, 12, 12), Winner = null},
+            new Match(){Id = 6, Name = "Tour de France", Location = "Antarctica", Date = new DateTime(2017, 12, 12), Winner = null}
+        };
+
+        public static List<Match> getMatches()
+        {
+            return matches;
+        }
+
+        public static Match getMatch(int id)
+        {
+            return matches.FirstOrDefault((p) => p.Id == id);
+        }
+
         public static Pidgeon getPidgeon(int id)
         {
             return pidgeons.FirstOrDefault((p) => p.Id == id);

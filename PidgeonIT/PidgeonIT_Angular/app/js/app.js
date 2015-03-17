@@ -10,8 +10,8 @@ pidgeonITApp.config(['$routeProvider',
         templateUrl: 'pidgeon.html',
         controller: 'PidgeonController'
       }).
-      when('/match', {
-        templateUrl: 'match.html',
+      when('/matches', {
+        templateUrl: 'matches.html',
         controller: 'MatchController'
       }).
       otherwise({
