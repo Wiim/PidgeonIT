@@ -60,6 +60,7 @@ pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', functio
 
 pidgeonITControllers.controller('MatchController', ['$scope', '$http', function($scope, $http)
 {
+<<<<<<< HEAD
 	$scope.loadMatches = function()
 	{
 		$http.get('http://localhost:56981/api/match/').success(function(data)
@@ -67,4 +68,12 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', function(
 			$scope.match = data;
 		}).error(function(data){/*stuff*/});
 	}
+=======
+
+	$scope.viewMatch = function(id)
+    {
+        $location.path('#/matches/' + id);
+    }
+
+>>>>>>> 25bac2dfd2c059e1448796d2c936ebf2938e359d
 }]);

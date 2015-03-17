@@ -1,0 +1,20 @@
+.navbar-custom
+{
+    background-color: #99CCFF !important;
+}
+.error
+{
+    color: red !important
+}
+
+.winner {
+    background-color: lightgreen;
+}
+
+.playedMatch {
+    background-color: aliceblue;
+}
+
+.unplayedMatch {
+    background-color: lightyellow;
+}

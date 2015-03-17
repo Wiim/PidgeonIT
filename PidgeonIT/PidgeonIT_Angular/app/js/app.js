@@ -14,6 +14,10 @@ pidgeonITApp.config(['$routeProvider',
         templateUrl: 'matches.html',
         controller: 'MatchController'
       }).
+        when('/match/:matchId', {
+            templateUrl: 'match.html',
+            controller: 'MatchController'
+        }).
       otherwise({
         redirectTo: '/index'
       });

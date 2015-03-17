@@ -1,5 +1,46 @@
 <div class="container-fluid">
+<<<<<<< HEAD
 	Hello World!
 	<button ng-click="loadMatches()">click me</button>
 	{{match}}
+=======
+    <!-- COPYT TIME -->
+    <div class="container-fluid">
+        <table class="table table-bordered text-center">
+            <tr class="text-center">
+                <th>Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Winner</th>
+                <th></th>
+                <th hidden class="error">Error</th>
+            </tr>
+            <tr ng-repeat="match in matches">
+                <td><input type="text" ng-model="match.Name"/></td>
+                <td><input type="text" ng-model="match.Date"/></td>
+                <td><input type="text" ng-model="match.Location"/></td>
+                <td><input type="text" ng-model="match.Winner"/></td>
+                <td><button class="btn-info" ng-click="viewMatch(match.Id)">View</button>
+                    <input class="btn btn-info" type="button" value="View" ng-click="editPidgeon(pidgeon)"/>
+                </td>
+                <td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
+            </tr>
+
+        </table>
+        <hr>
+        </div>
+    <script>
+        function onclick() {
+
+        }
+    </script>
+    <!-- END COPY TIME -->
+
+    <!-- GO TIME
+
+    TABEL PER MATCH ONGESPEELD EN GESPEELD.
+    In match willen wij een winnaar.
+
+    -->
+>>>>>>> 25bac2dfd2c059e1448796d2c936ebf2938e359d
 </div>
