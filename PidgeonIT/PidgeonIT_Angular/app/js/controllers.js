@@ -60,5 +60,10 @@ pidgeonITControllers.controller('PidgeonController', ['$scope', '$http', functio
 
 pidgeonITControllers.controller('MatchController', ['$scope', function($scope)
 {
-	//stuff here
+
+	$scope.viewMatch = function(id)
+    {
+        $location.path('#/matches/' + id);
+    }
+
 }]);
