@@ -5,13 +5,13 @@ pidgeonITControllers.controller('PidgeonController',
 {
 	$scope.loadPidgeons = function()
 	{
-		console.log(PidgeonService.loadPidgeons());
+		//console.log(PidgeonService.loadPidgeons());
 		//$scope.pidgeons = PidgeonService.loadPidgeons();
 		
-		// $http.get('http://localhost:56981/api/pidgeon').success(function(data)
-		// {
-			// $scope.pidgeons = data;
-		// }).error(function(data){$scope.pidgeons = data});
+		$http.get('http://localhost:56981/api/pidgeon').success(function(data)
+		{
+			$scope.pidgeons = data;
+		}).error(function(data){$scope.pidgeons = data});
 	};
 	
 	$scope.unloadPidgeons = function()
