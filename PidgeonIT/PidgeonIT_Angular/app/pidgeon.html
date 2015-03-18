@@ -3,7 +3,7 @@
 	<input class="btn" type="button" value="Unload Pidgeons" ng-click="unloadPidgeons()"/>
 	<table class="table table-bordered text-center">
 		<tr class="text-center">
-			<th>Id</th>
+			<th hidden>Id</th>
 			<th>Name</th>
 			<th>Owner Name</th>
 			<th>Wins</th>
@@ -11,14 +11,22 @@
 			<th hidden class="error">Error</th>
 		</tr>
 		<tr ng-repeat="pidgeon in pidgeons">
-			<td><input type="text" ng-model="pidgeon.Id"/></td>
+			<td hidden>{{pidgeon.pidgeonID}}</td>
 			<td><input type="text" ng-model="pidgeon.Name"/></td>
-			<td><input type="text" ng-model="pidgeon.Owner.Name"/></td>
-			<td><input type="text" ng-model="pidgeon.Wins"/></td>
+			<td>{{pidgeon.Owner.Name}}</td>
+			<td><input type="text" ng-model="pidgeon.matchID"/></td> <!-- matchID = wins-->
 			<td>
 				<input class="btn btn-warning" type="button" value="Edit" ng-click="editPidgeon(pidgeon)"/>
-				<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeon($index, pidgeon.Id)"/>
+				<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeon($index, pidgeon.pidgeonID)"/>
 			</td>
+			<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
+		</tr>
+		<tr>
+			<td hidden></td>
+			<td><input type="text" ng-model="newPidgeon.Name"/></td>
+			<td><input type="text" ng-model="newPidgeon.Owner.Name"/></td>
+			<td><input type="text" ng-model="newPidgeon.matchID"/></td>
+			<td><input class="btn btn-success" type="button" value="Add" ng-click="addPidgeon(newPidgeon)"/></td>
 			<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
 		</tr>
 	</table>

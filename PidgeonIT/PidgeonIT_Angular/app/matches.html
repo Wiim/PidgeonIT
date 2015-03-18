@@ -9,10 +9,10 @@
 		</tr>
 		<tr ng-repeat="match in matches">
 			<td>{{match.Name}}</td>
-			<td>{{match.Date}}</td>
+			<td>{{match.date}}</td>
 			<td>{{match.Location}}</td>
 			<td>{{match.Winner}}</td>
-			<td><button class="btn btn-info" ng-click="viewMatch(match.Id)">View</button></td>
+			<td><button class="btn btn-info" ng-click="viewMatch(match.matchID)">View</button></td>
 		</tr>
 	</table>
 </div>

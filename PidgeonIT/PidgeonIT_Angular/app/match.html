@@ -16,7 +16,7 @@
 			</tr>
 			<tr>
 				<th>Date</th>
-				<td>{{match.Date}}</td>
+				<td>{{match.date}}</td>
 			</tr>
 		</table>
 	</div>
@@ -36,7 +36,7 @@
 				<td>{{pidgeon.Owner.Name}}</td>
 				<td>{{pidgeon.Wins}}</td>
 				<td>
-					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeonFromMatch($index, match.Id, pidgeon.Id)"/>
+					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeonFromMatch($index, match.matchID, pidgeon.Id)"/>
 				</td>
 			</tr>
 		</table>
@@ -61,7 +61,7 @@
 			<td>{{pidgeon.Owner.Name}}</td>
 			<td>{{pidgeon.Wins}}</td>
 			<td>
-				<input class="btn btn-success" type="button" value="Add" ng-click="addPidgeonToMatch(pidgeon.Id)"/>
+				<input class="btn btn-success" type="button" value="Add" ng-click="addPidgeonToMatch($index, pidgeon.pidgeonID)"/>
 			</td>
 		</tr>
 	</table>
