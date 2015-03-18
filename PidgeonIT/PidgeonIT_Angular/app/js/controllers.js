@@ -97,6 +97,7 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routePa
 	{
 		$http.post('http://localhost:56981/api/matches/' + $scope.match.matchID + '/' + pidgeonId).success(function(data)
 		{
+			$scope.match = data;
 			$scope.pidgeons.splice(index, 1);
 		}).error(function(data){console.log(data);});
 	};
