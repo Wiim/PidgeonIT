@@ -1,18 +1,21 @@
-<div class="container-fluid" ng-init="loadMatches()">
-    <table class="table table-bordered text-center">
-		<tr>
-			<th>Name</th>
-			<th>Date</th>
-			<th>Location</th>
-			<th>Winner</th>
-			<th>Action</th>
-		</tr>
-		<tr ng-repeat="match in matches">
-			<td>{{match.Name}}</td>
-			<td>{{match.date}}</td>
-			<td>{{match.Location}}</td>
-			<td>{{match.Winner}}</td>
-			<td><button class="btn btn-info" ng-click="viewMatch(match.matchID)">View</button></td>
-		</tr>
-	</table>
+<div style="padding:20px" class="container-fluid" ng-init="loadMatches()">
+	<div class="span12 well">
+		<h2>Matches:</h2>
+		<table class="table table-bordered text-center">
+			<tr>
+				<th>Name</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Winner</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="match in matches">
+				<td>{{match.Name}}</td>
+				<td>{{match.date}}</td>
+				<td>{{match.Location}}</td>
+				<td>{{match.Winner}}</td>
+				<td><button class="btn btn-info" ng-click="viewMatch(match.matchID)">View</button></td>
+			</tr>
+		</table>
+	</div>
 </div>

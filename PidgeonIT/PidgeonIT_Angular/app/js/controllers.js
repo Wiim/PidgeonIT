@@ -1,28 +1,28 @@
 var pidgeonITControllers = angular.module('pidgeonITControllers', []);
 
+/**************************************************
+ * PidgeonController
+**************************************************/
 pidgeonITControllers.controller('PidgeonController', 
 ['$scope', '$http', 'PidgeonService', function($scope, $http, PidgeonService)
 {
-	$scope.newPidgeon = {"Owner":"", "Name":"", "matchID":0};
+	$scope.newPidgeon = {"ownerID":null, "Name":"", "matchID":null};
+	
+	function getOwners()
+	{
+		$http.get('http://localhost:56981/api/owners/').success(function(data)
+		{
+			$scope.owners = data;
+		}).error(function(data){console.log(data);});
+	};
 	
 	$scope.loadPidgeons = function()
 	{
-		//console.log(PidgeonService.loadPidgeons());
-		//$scope.pidgeons = PidgeonService.loadPidgeons();
-		
+		getOwners();
 		$http.get('http://localhost:56981/api/pidgeons').success(function(data)
 		{
-			var maxID = 0;
-			for (i=0; i<data.length; i++)
-			{
-				if (data[i].pidgeonID > maxID)
-				{
-					maxID = data[i].pidgeonID;
-				}
-			}
-			$scope.newPidgeonID = maxID + 1;
 			$scope.pidgeons = data;
-		}).error(function(data){$scope.pidgeons = data});
+		}).error(function(data){console.log(data);});
 	};
 	
 	$scope.unloadPidgeons = function()
@@ -36,7 +36,7 @@ pidgeonITControllers.controller('PidgeonController',
 		$http.get('http://localhost:56981/api/pidgeons/' + pidgeonId).success(function(data)
 		{
 			$scope.pidgeon = data;
-		}).error(function(data){$scope.pidgeon = data});
+		}).error(function(data){console.log(data);});
 	};
 	
 	$scope.removePidgeon = function(index, pidgeonId)
@@ -44,13 +44,13 @@ pidgeonITControllers.controller('PidgeonController',
 		$http.delete('http://localhost:56981/api/pidgeons/' + pidgeonId).success(function(data)
 		{
 			$scope.pidgeons.splice(index, 1);
-		}).error(function(data){$scope.pidgeons[index].error = data});
+		}).error(function(data){console.log(data);});
 	};
 	
 	function clearNewPidgeon()
 	{
 		$scope.newPidgeon.Name = "";
-		$scope.newPidgeon.Owner.Name = "";
+		$scope.newPidgeon.ownerID = null;
 		$scope.newPidgeon.matchID = null;
 	}
 	
@@ -60,8 +60,10 @@ pidgeonITControllers.controller('PidgeonController',
 		{
 			$scope.pidgeons = data;
 			clearNewPidgeon();
-			//$scope.pidgeons.push(pidgeon);
-		}).error(function(data){console.log(data);});
+		}).error(function(data)
+		{
+			console.log(data);
+		});
 	};
 	
 	$scope.editPidgeon = function(pidgeon)
@@ -69,18 +71,20 @@ pidgeonITControllers.controller('PidgeonController',
 		$http.put('http://localhost:56981/api/pidgeons/', pidgeon).success(function(data)
 		{
 			$scope.pidgeons = data;
-			//$scope.pidgeons.push(pidgeon);
+			clearNewPidgeon();
 		}).error(function(data){console.log(data);});
 	};
 }]);
 
+/**************************************************
+ * MatchesController
+**************************************************/
 pidgeonITControllers.controller('MatchesController', ['$scope', '$http', '$location', function($scope, $http, $location)
 {
 	$scope.loadMatches = function()
 	{
 		$http.get('http://localhost:56981/api/matches/').success(function(data)
 		{
-			console.log(JSON.stringify(data));
 			$scope.matches = data;
 		}).error(function(data){console.log(data);});
 	};
@@ -91,14 +95,18 @@ pidgeonITControllers.controller('MatchesController', ['$scope', '$http', '$locat
     };
 }]);
 
+/**************************************************
+ * MatchController
+**************************************************/
 pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams)
 {
 	$scope.addPidgeonToMatch = function(index, pidgeonId)
 	{
 		$http.post('http://localhost:56981/api/matches/' + $scope.match.matchID + '/' + pidgeonId).success(function(data)
 		{
-			$scope.match = data;
-			$scope.pidgeons.splice(index, 1);
+			//$scope.match = data;
+			//$scope.pidgeons.splice(index, 1);
+			$scope.loadMatch();
 		}).error(function(data){console.log(data);});
 	};
 	
@@ -106,7 +114,8 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routePa
 	{
 		$http.delete('http://localhost:56981/api/matches/' + matchId + '/' + pidgeonId).success(function(data)
 		{
-			$scope.match.Pidgeons.splice(index, 1);
+			//$scope.match.Pidgeons.splice(index, 1);
+			$scope.loadMatch();
 		}).error(function(data){console.log(data);});
 	};
 	
@@ -114,19 +123,25 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routePa
 	{
 		$http.get('http://localhost:56981/api/matches/' + $routeParams.matchId).success(function(data)
 		{
+			// do stuff here to split the pidgeons between in and out
 			$scope.match = data;
 			$scope.getOwners();
-			$scope.loadPidgeons();
+			$http.get('http://localhost:56981/api/pidgeons').success(function(data)
+			{
+				$scope.pidgeons = data;
+			}).error(function(data){console.log(data);};
+			
+			
 		}).error(function(data){console.log(data);});
 	};
 	
-	$scope.loadPidgeons = function()
-	{
-		$http.get('http://localhost:56981/api/pidgeons').success(function(data)
-		{
-			$scope.pidgeons = data;
-		}).error(function(data){$scope.pidgeons = data});
-	};
+	// $scope.loadPidgeons = function()
+	// {
+			// $http.get('http://localhost:56981/api/pidgeons').success(function(data)
+			// {
+				// $scope.pidgeons = data;
+			// }).error(function(data){$scope.pidgeons = data});
+	// };
 	
 	$scope.getOwners = function()
 	{

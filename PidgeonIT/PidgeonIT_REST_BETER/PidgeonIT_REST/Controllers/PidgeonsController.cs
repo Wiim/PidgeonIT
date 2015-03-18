@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PidgeonIT_REST.Models;
+using System.Diagnostics;
 
 namespace PidgeonIT_REST.Controllers
 {
@@ -82,6 +83,7 @@ namespace PidgeonIT_REST.Controllers
                 return BadRequest(ModelState);
             }
 
+            Debug.WriteLine(pidgeon.ToString());
             db.Pidgeons.Add(pidgeon);
             db.SaveChanges();
 

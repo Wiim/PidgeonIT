@@ -24,19 +24,19 @@
 		<h2>Pidgeons in match:</h2>
 		<table class="table table-bordered text-center">
 			<tr class="text-center">
-				<th>Id</th>
+				<th hidden>Id</th>
 				<th>Name</th>
 				<th>Owner Name</th>
 				<th>Wins</th>
 				<th>Action</th>
 			</tr>
 			<tr ng-repeat="pidgeon in match.Pidgeons">
-				<td>{{pidgeon.Id}}</td>
+				<td hidden>{{pidgeon.pidgeonID}}</td>
 				<td>{{pidgeon.Name}}</td>
 				<td>{{pidgeon.Owner.Name}}</td>
-				<td>{{pidgeon.Wins}}</td>
+				<td>{{pidgeon.matchID}}</td>
 				<td>
-					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeonFromMatch($index, match.matchID, pidgeon.Id)"/>
+					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeonFromMatch($index, match.matchID, pidgeon.pidgeonID)"/>
 				</td>
 			</tr>
 		</table>
@@ -49,17 +49,17 @@
 		</select>
 		<table class="table table-bordered text-center">
 		<tr class="text-center">
-			<th>Id</th>
+			<th hidden>Id</th>
 			<th>Name</th>
 			<th>Owner Name</th>
 			<th>Wins</th>
 			<th>Action</th>
 		</tr>
 		<tr ng-repeat="pidgeon in pidgeons | ownerFilter:owner">
-			<td>{{pidgeon.Id}}</td>
+			<td hidden>{{pidgeon.pidgeonID}}</td>
 			<td>{{pidgeon.Name}}</td>
 			<td>{{pidgeon.Owner.Name}}</td>
-			<td>{{pidgeon.Wins}}</td>
+			<td>{{pidgeon.matchID}}</td>
 			<td>
 				<input class="btn btn-success" type="button" value="Add" ng-click="addPidgeonToMatch($index, pidgeon.pidgeonID)"/>
 			</td>

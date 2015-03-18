@@ -105,36 +105,31 @@ namespace PidgeonIT_REST.Controllers
         [HttpPost]
         public IHttpActionResult AddPidgeonToMatch(int matchId, int pidgeonId)
         {
-
             Match match = db.Matches.Find(matchId);
-            if (match == null)
+            Pidgeon pidgeon = db.Pidgeons.Find(pidgeonId);
+            if (match == null || pidgeon == null)
             {
                 return NotFound();
             }
-
-            match.Pidgeons.Add(db.Pidgeons.Find(pidgeonId));
-
+            match.Pidgeons.Add(pidgeon);
             db.SaveChanges();
 
             return Json(match);
-            //bool success = Database.removePidgeonFromMatch(matchId, pidgeonId);
-            //if (success)
-            //{
-            //    return Ok();
-            //}
-            //return NotFound();
         }
 
         [HttpDelete]
         public IHttpActionResult DeletePidgeonFromMatch(int matchId, int pidgeonId)
         {
-            return Ok();
-            //bool success = Database.removePidgeonFromMatch(matchId, pidgeonId);
-            //if (success)
-            //{
-            //    return Ok();
-            //}
-            //return NotFound();
+            Match match = db.Matches.Find(matchId);
+            Pidgeon pidgeon = db.Pidgeons.Find(pidgeonId);
+            if (match == null || pidgeon == null)
+            {
+                return NotFound();
+            }
+            match.Pidgeons.Remove(pidgeon);
+            db.SaveChanges();
+
+            return Json(match);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,8 @@ namespace PidgeonIT_REST.Models
         public virtual Owner Owner { get; set; }
 
         public int matchID { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<Match> Match { get; set; } 
     }
 }
