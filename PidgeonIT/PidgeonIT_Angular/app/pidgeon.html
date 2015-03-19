@@ -26,7 +26,9 @@
 			<form name="form" novalidate>
 				<tr>
 					<td hidden></td>
-					<td><input type="text" ng-model="newPidgeon.Name"/></td>
+					<td>
+						<input type="text" name="newPidgeonName" ng-model="newPidgeon.Name" required
+					</td>
 					<td>
 						<select class="form-control" ng-model="newPidgeon.ownerID" ng-options="owner.ownerID as owner.Name for owner in owners">
 							<option value=""></option>
@@ -46,3 +48,11 @@
 		</table>
 	</div>
 </div>
+<!--
+<div>
+	<form name="testform">
+		<input type="text" ng-model="numbertest" name="numbertest" integer/>
+		<span ng-show="form.numbertest.$error.integer">The value is not a valid integer!</span>
+	</form>
+</div>
+-->

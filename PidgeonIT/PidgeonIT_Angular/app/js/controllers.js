@@ -104,8 +104,6 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routePa
 	{
 		$http.post('http://localhost:56981/api/matches/' + $scope.match.matchID + '/' + pidgeonId).success(function(data)
 		{
-			//$scope.match = data;
-			//$scope.pidgeons.splice(index, 1);
 			$scope.loadMatch();
 		}).error(function(data){console.log(data);});
 	};
@@ -114,33 +112,28 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routePa
 	{
 		$http.delete('http://localhost:56981/api/matches/' + matchId + '/' + pidgeonId).success(function(data)
 		{
-			//$scope.match.Pidgeons.splice(index, 1);
 			$scope.loadMatch();
 		}).error(function(data){console.log(data);});
 	};
 	
 	$scope.loadMatch = function()
 	{
-		$http.get('http://localhost:56981/api/matches/' + $routeParams.matchId).success(function(data)
+		$http.get('http://localhost:56981/api/matches/' + $routeParams.matchId).success(function(matchData)
 		{
-			$scope.match = data;
 			$scope.getOwners();
-			$http.get('http://localhost:56981/api/pidgeons').success(function(data)
+			$http.get('http://localhost:56981/api/pidgeons').success(function(pidgeonData)
 			{
-				var allPidgeons = [];
 				$scope.pidgeons = [];
-				//console.log(JSON.stringify(data));
-				allPidgeons = data;
-				//console.log(JSON.stringify(allPidgeons));
+				$scope.match = matchData;
 				
 				// For all Pidgeons...
-				angular.forEach(allPidgeons, function(pidgeon)
+				angular.forEach(pidgeonData, function(pidgeon)
 				{
 					var alreadyInMatch = false;
 					// ... loop through all Pidgeons already in the match ...
 					angular.forEach($scope.match.Pidgeons, function(matchPidgeon)
 					{
-						if (pidgeon == matchPidgeon)
+						if (pidgeon.pidgeonID == matchPidgeon.pidgeonID)
 						{
 							alreadyInMatch = true;
 						}
