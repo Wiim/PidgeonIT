@@ -16,26 +16,33 @@
 				<td hidden>{{pidgeon.pidgeonID}}</td>
 				<td><input type="text" ng-model="pidgeon.Name"/></td>
 				<td>{{pidgeon.Owner.Name}}</td>
-				<td><input type="text" ng-model="pidgeon.matchID"/></td> <!-- matchID = wins-->
+				<td><input type="text" ng-model="pidgeon.matchID"/></td> <!-- matchID == wins-->
 				<td>
 					<input class="btn btn-warning" type="button" value="Edit" ng-click="editPidgeon(pidgeon)"/>
 					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeon($index, pidgeon.pidgeonID)"/>
 				</td>
 				<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
 			</tr>
-			<tr>
-				<td hidden></td>
-				<td><input type="text" ng-model="newPidgeon.Name"/></td>
-				<td>
-					<select class="form-control" ng-model="newPidgeon.ownerID" ng-options="owner.ownerID as owner.Name for owner in owners">
-						<option value=""></option>
-					</select>
-					<!--<input type="text" ng-model="newPidgeon.Owner.Name"/>-->
-				</td>
-				<td><input type="text" ng-model="newPidgeon.matchID"/></td>
-				<td><input class="btn btn-success" type="button" value="Add" ng-click="addPidgeon(newPidgeon)"/></td>
-				<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
-			</tr>
+			<form name="form" novalidate>
+				<tr>
+					<td hidden></td>
+					<td><input type="text" ng-model="newPidgeon.Name"/></td>
+					<td>
+						<select class="form-control" ng-model="newPidgeon.ownerID" ng-options="owner.ownerID as owner.Name for owner in owners">
+							<option value=""></option>
+						</select>
+						<!--<input type="text" ng-model="newPidgeon.Owner.Name"/>-->
+					</td>
+					<td>
+						<input type="text" name="newPidgeonWins" ng-model="newPidgeon.matchID" integer/>
+						<span ng-show="form.newPidgeonWins.$error.integer"></span>
+					</td>
+					<td>
+						<input class="btn btn-success" type="button" value="Add" ng-click="addPidgeon(newPidgeon)"/>
+					</td>
+					<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
+				</tr>
+			</form>
 		</table>
 	</div>
 </div>

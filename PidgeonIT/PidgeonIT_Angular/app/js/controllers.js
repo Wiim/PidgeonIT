@@ -123,25 +123,37 @@ pidgeonITControllers.controller('MatchController', ['$scope', '$http', '$routePa
 	{
 		$http.get('http://localhost:56981/api/matches/' + $routeParams.matchId).success(function(data)
 		{
-			// do stuff here to split the pidgeons between in and out
 			$scope.match = data;
 			$scope.getOwners();
 			$http.get('http://localhost:56981/api/pidgeons').success(function(data)
 			{
-				$scope.pidgeons = data;
-			}).error(function(data){console.log(data);};
-			
-			
+				var allPidgeons = [];
+				$scope.pidgeons = [];
+				//console.log(JSON.stringify(data));
+				allPidgeons = data;
+				//console.log(JSON.stringify(allPidgeons));
+				
+				// For all Pidgeons...
+				angular.forEach(allPidgeons, function(pidgeon)
+				{
+					var alreadyInMatch = false;
+					// ... loop through all Pidgeons already in the match ...
+					angular.forEach($scope.match.Pidgeons, function(matchPidgeon)
+					{
+						if (pidgeon == matchPidgeon)
+						{
+							alreadyInMatch = true;
+						}
+					});
+					// ... and if the Pidgeon does not already exist in the match, add it to the addable Pidgeons list.
+					if (!alreadyInMatch)
+					{
+						$scope.pidgeons.push(pidgeon);
+					}
+				});
+			}).error(function(data){console.log(data);});
 		}).error(function(data){console.log(data);});
 	};
-	
-	// $scope.loadPidgeons = function()
-	// {
-			// $http.get('http://localhost:56981/api/pidgeons').success(function(data)
-			// {
-				// $scope.pidgeons = data;
-			// }).error(function(data){$scope.pidgeons = data});
-	// };
 	
 	$scope.getOwners = function()
 	{
