@@ -3,31 +3,32 @@
 		<h2>Pidgeons:</h2>
 		<input class="btn btn-info" type="button" value="Load Pidgeons" ng-click="loadPidgeons()"/>
 		<input class="btn btn-info" type="button" value="Unload Pidgeons" ng-click="unloadPidgeons()"/>
-		<table class="table table-bordered text-center">
-			<tr class="text-center">
-				<th hidden>Id</th>
-				<th>Name</th>
-				<th>Owner Name</th>
-				<th>Wins</th>
-				<th>Action</th>
-				<th hidden class="error">Error</th>
-			</tr>
-			<tr ng-repeat="pidgeon in pidgeons">
-				<td hidden>{{pidgeon.pidgeonID}}</td>
-				<td><input type="text" ng-model="pidgeon.Name"/></td>
-				<td>{{pidgeon.Owner.Name}}</td>
-				<td><input type="text" ng-model="pidgeon.matchID"/></td> <!-- matchID == wins-->
-				<td>
-					<input class="btn btn-warning" type="button" value="Edit" ng-click="editPidgeon(pidgeon)"/>
-					<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeon($index, pidgeon.pidgeonID)"/>
-				</td>
-				<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
-			</tr>
-			<form name="form" novalidate>
+		<form name="pidgeonForm" novalidate>
+			<table class="table table-bordered text-center">
+				<tr class="text-center">
+					<th hidden>Id</th>
+					<th>Name</th>
+					<th>Owner Name</th>
+					<th>Wins</th>
+					<th>Action</th>
+					<th hidden class="error">Error</th>
+				</tr>
+				<tr ng-repeat="pidgeon in pidgeons">
+					<td hidden>{{pidgeon.pidgeonID}}</td>
+					<td><input type="text" ng-model="pidgeon.Name"/></td>
+					<td>{{pidgeon.Owner.Name}}</td>
+					<td><input type="text" ng-model="pidgeon.matchID"/></td> <!-- matchID == wins-->
+					<td>
+						<input class="btn btn-warning" type="button" value="Edit" ng-click="editPidgeon(pidgeon)"/>
+						<input class="btn btn-danger" type="button" value="Remove" ng-click="removePidgeon($index, pidgeon.pidgeonID)"/>
+					</td>
+					<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
+				</tr>
 				<tr>
 					<td hidden></td>
 					<td>
-						<input type="text" name="newPidgeonName" ng-model="newPidgeon.Name" required
+						<input type="text" name="newPidgeonName" ng-model="newPidgeon.Name" ng-model-options="{ updateOn: 'blur' }" required=""/>
+						<span class="error" ng-show="pidgeonForm.newPidgeonName.$error.required && pidgeonForm.newPidgeonName.$touched">Required!</span>
 					</td>
 					<td>
 						<select class="form-control" ng-model="newPidgeon.ownerID" ng-options="owner.ownerID as owner.Name for owner in owners">
@@ -44,15 +45,7 @@
 					</td>
 					<td hidden class="error" id="error{{$index}}" ng-model="pidgeon.error"></td>
 				</tr>
-			</form>
-		</table>
+			</table>
+		</form>
 	</div>
 </div>
-<!--
-<div>
-	<form name="testform">
-		<input type="text" ng-model="numbertest" name="numbertest" integer/>
-		<span ng-show="form.numbertest.$error.integer">The value is not a valid integer!</span>
-	</form>
-</div>
--->
